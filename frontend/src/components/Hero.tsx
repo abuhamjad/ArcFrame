@@ -1,7 +1,7 @@
 import { m } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { useSmoothScroll } from '../hooks/useSmoothScroll'
-import dashboardImg from '../assets/sustainair-dashboard.png'
+import dashboardImg from '../assets/hero.png'
 
 export default function Hero() {
   const scrollToSection = useSmoothScroll()
