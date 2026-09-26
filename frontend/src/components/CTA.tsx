@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, ArrowRight, Mail, User, Building, MessageSquare, Check } from 'lucide-react'
-import { useSmoothScroll } from './useSmoothScroll'
+import { useSmoothScroll } from '../hooks/useSmoothScroll'
 
 export default function CTA() {
   const [showModal, setShowModal] = useState(false)

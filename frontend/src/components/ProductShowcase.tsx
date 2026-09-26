@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { ArrowRight, Activity, Droplets, Wind, TrendingUp, Bell, Map } from 'lucide-react'
-import { useSmoothScroll } from './useSmoothScroll'
+import { useSmoothScroll } from '../hooks/useSmoothScroll'
 import MediaPlaceholder from './MediaPlaceholder'
 
 const sampleMetrics = [

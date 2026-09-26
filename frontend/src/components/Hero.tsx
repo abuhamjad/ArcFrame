@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
-import { useSmoothScroll } from './useSmoothScroll'
+import { useSmoothScroll } from '../hooks/useSmoothScroll'
 import MediaPlaceholder from './MediaPlaceholder'
 
 export default function Hero() {
