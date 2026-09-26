@@ -1,6 +1,6 @@
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { Layers, AlertTriangle, FileSearch } from 'lucide-react'
-import MediaPlaceholder from './MediaPlaceholder'
+import smogImg from '../assets/urban-smog.jpeg'
 
 const problems = [
   {
@@ -30,7 +30,7 @@ export default function Problem() {
   return (
     <section className="py-20 lg:py-28 bg-white">
       <div className="section-container">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -45,13 +45,13 @@ export default function Problem() {
             Government and environmental authorities face significant challenges when
             trying to transform scattered air quality data into meaningful action.
           </p>
-        </motion.div>
+        </m.div>
 
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Problem Cards */}
           <div className="space-y-4">
             {problems.map((problem, index) => (
-              <motion.div
+              <m.div
                 key={problem.number}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -73,25 +73,33 @@ export default function Problem() {
                     <p className="text-gray-600">{problem.description}</p>
                   </div>
                 </div>
-              </motion.div>
+              </m.div>
             ))}
           </div>
 
           {/* Visual */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            {/* REPLACE: Add your pollution/city image here */}
-            <MediaPlaceholder
-              type="image"
-              label="POLLUTION / CITY IMAGE"
-              description="Replace with an image showing urban pollution or city monitoring"
-              aspect="aspect-video"
-            />
-          </motion.div>
+            <figure className="border border-gray-300">
+              <img
+                src={smogImg}
+                width={540}
+                height={360}
+                alt="City skyline barely visible through a thick layer of smog"
+                className="w-full aspect-video object-cover block"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption className="text-xs text-gray-500 px-4 py-3 border-t border-gray-200 bg-white">
+                Persistent haze over a metropolitan area — the conditions authorities
+                are asked to explain, forecast and act on.
+              </figcaption>
+            </figure>
+          </m.div>
         </div>
       </div>
     </section>

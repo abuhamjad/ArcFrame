@@ -1,7 +1,7 @@
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { useSmoothScroll } from '../hooks/useSmoothScroll'
-import MediaPlaceholder from './MediaPlaceholder'
+import dashboardImg from '../assets/sustainair-dashboard.png'
 
 export default function Hero() {
   const scrollToSection = useSmoothScroll()
@@ -11,7 +11,7 @@ export default function Hero() {
       <div className="section-container">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left Content */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -47,27 +47,31 @@ export default function Hero() {
                 Explore SustainAir
               </button>
             </div>
-          </motion.div>
+          </m.div>
 
           {/* Right Visual */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             className="relative"
           >
-            {/* Main Video/Media Placeholder */}
-            <div className="border border-gray-300">
-              <MediaPlaceholder
-                type="video"
-                label="HERO VIDEO"
-                description="Replace with your hero video showing smart city, pollution monitoring, or environmental sensors"
+            {/* Product screenshot */}
+            <div className="border border-gray-300 bg-white">
+              <img
+                src={dashboardImg}
+                width={1919}
+                height={991}
+                alt="SustainAir executive dashboard showing national AQI, 24-hour prediction, monitoring station count, AQI trend chart and recent pollution alerts"
+                className="w-full h-auto block"
+                fetchPriority="high"
+                decoding="async"
               />
             </div>
 
             {/* Floating Data Cards */}
             <div className="absolute -left-4 top-1/4 hidden lg:block">
-              <motion.div
+              <m.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
@@ -76,15 +80,15 @@ export default function Hero() {
                 <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">
                   AQI
                 </p>
-                <p className="text-2xl font-semibold text-gray-950">72</p>
+                <p className="text-2xl font-semibold text-gray-950">156</p>
                 <p className="text-xs text-gray-500 mt-1">
-                  <span className="text-green-600">↓</span> Good
+                  <span className="text-amber-600">↑</span> Moderate
                 </p>
-              </motion.div>
+              </m.div>
             </div>
 
             <div className="absolute -right-4 top-1/3 hidden lg:block">
-              <motion.div
+              <m.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.5 }}
@@ -93,42 +97,42 @@ export default function Hero() {
                 <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">
                   PM2.5
                 </p>
-                <p className="text-2xl font-semibold text-gray-950">48</p>
-                <p className="text-xs text-gray-500">µg/m³</p>
-              </motion.div>
+                <p className="text-2xl font-semibold text-gray-950">52%</p>
+                <p className="text-xs text-gray-500">of pollutant load</p>
+              </m.div>
             </div>
 
             <div className="absolute -left-4 bottom-1/4 hidden lg:block">
-              <motion.div
+              <m.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.6 }}
                 className="bg-white border border-gray-200 p-4 min-w-[140px]"
               >
                 <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">
-                  Risk Level
+                  Active Alerts
                 </p>
-                <p className="text-lg font-semibold text-amber-600">Moderate</p>
-              </motion.div>
+                <p className="text-lg font-semibold text-amber-600">3 open</p>
+              </m.div>
             </div>
 
             <div className="absolute -right-4 bottom-1/4 hidden lg:block">
-              <motion.div
+              <m.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.7 }}
                 className="bg-white border border-gray-200 p-4 min-w-[140px]"
               >
                 <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">
-                  Forecast
+                  Tomorrow
                 </p>
-                <p className="text-lg font-semibold text-gray-950">+12%</p>
+                <p className="text-lg font-semibold text-gray-950">178</p>
                 <p className="text-xs text-gray-500 mt-1">
-                  <span className="text-amber-600">↑</span> Increasing
+                  <span className="text-amber-600">↑</span> High risk
                 </p>
-              </motion.div>
+              </m.div>
             </div>
-          </motion.div>
+          </m.div>
         </div>
       </div>
     </section>

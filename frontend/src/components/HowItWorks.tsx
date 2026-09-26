@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { Plug, Cpu, LineChart, Zap } from 'lucide-react'
 
 const steps = [
@@ -33,7 +33,7 @@ export default function HowItWorks() {
   return (
     <section id="how-it-works" className="py-20 lg:py-28 bg-white">
       <div className="section-container">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -47,7 +47,7 @@ export default function HowItWorks() {
           <p className="section-subheading mx-auto">
             A streamlined process designed for government and environmental teams.
           </p>
-        </motion.div>
+        </m.div>
 
         {/* Desktop Steps */}
         <div className="hidden lg:block relative">
@@ -56,7 +56,7 @@ export default function HowItWorks() {
 
           <div className="grid grid-cols-4 gap-8">
             {steps.map((step, index) => (
-              <motion.div
+              <m.div
                 key={step.number}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -76,7 +76,7 @@ export default function HowItWorks() {
                   </h3>
                   <p className="text-sm text-gray-600">{step.description}</p>
                 </div>
-              </motion.div>
+              </m.div>
             ))}
           </div>
         </div>
@@ -84,7 +84,7 @@ export default function HowItWorks() {
         {/* Mobile/Tablet Steps */}
         <div className="lg:hidden space-y-4">
           {steps.map((step, index) => (
-            <motion.div
+            <m.div
               key={step.number}
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -106,7 +106,7 @@ export default function HowItWorks() {
                 </h3>
                 <p className="text-sm text-gray-600">{step.description}</p>
               </div>
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </div>

@@ -1,7 +1,10 @@
-import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { m, AnimatePresence } from 'framer-motion'
 import { X, ArrowRight, Mail, User, Building, MessageSquare, Check } from 'lucide-react'
 import { useSmoothScroll } from '../hooks/useSmoothScroll'
+
+const FOCUSABLE =
+  'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
 
 export default function CTA() {
   const [showModal, setShowModal] = useState(false)
@@ -13,23 +16,84 @@ export default function CTA() {
     message: '',
   })
   const scrollToSection = useSmoothScroll()
+  const dialogRef = useRef<HTMLDivElement>(null)
+  const openerRef = useRef<HTMLElement | null>(null)
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     setFormSubmitted(true)
   }
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setShowModal(false)
     setFormSubmitted(false)
     setFormData({ name: '', organization: '', email: '', message: '' })
+  }, [])
+
+  const handleOpen = () => {
+    openerRef.current = document.activeElement as HTMLElement | null
+    setShowModal(true)
   }
+
+  // Lock background scroll while the dialog is open, and restore focus to the
+  // button that opened it on close.
+  useEffect(() => {
+    if (!showModal) return
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = previousOverflow
+      openerRef.current?.focus()
+    }
+  }, [showModal])
+
+  // Move focus into the dialog, and follow the content when the form is
+  // replaced by the confirmation panel.
+  useEffect(() => {
+    if (!showModal) return
+    const target = formSubmitted
+      ? dialogRef.current?.querySelector<HTMLElement>('.btn-primary')
+      : dialogRef.current?.querySelector<HTMLElement>(FOCUSABLE)
+    target?.focus()
+  }, [showModal, formSubmitted])
+
+  // Escape closes; Tab stays inside the dialog.
+  useEffect(() => {
+    if (!showModal) return
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        handleClose()
+        return
+      }
+      if (e.key !== 'Tab') return
+
+      const focusable = dialogRef.current?.querySelectorAll<HTMLElement>(FOCUSABLE)
+      if (!focusable || focusable.length === 0) return
+
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault()
+        last.focus()
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault()
+        first.focus()
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+    // The focusable list is re-queried on every keypress, so this does not
+    // need to re-bind when the panel contents change.
+  }, [showModal, handleClose])
 
   return (
     <>
       <section className="py-20 lg:py-28 bg-white border-t border-gray-200">
         <div className="section-container">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -46,13 +110,9 @@ export default function CTA() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button
-                type="button"
-                onClick={() => setShowModal(true)}
-                className="btn-primary"
-              >
+              <button type="button" onClick={handleOpen} className="btn-primary">
                 Request a Demo
-                <ArrowRight size={18} className="ml-2" />
+                <ArrowRight size={18} className="ml-2" aria-hidden="true" />
               </button>
               <button
                 type="button"
@@ -62,39 +122,47 @@ export default function CTA() {
                 Contact Arcframe
               </button>
             </div>
-          </motion.div>
+          </m.div>
         </div>
       </section>
 
       {/* Demo Request Modal */}
       <AnimatePresence>
         {showModal && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50"
-            onClick={handleClose}
+            onMouseDown={(e) => {
+              // Only close on a click that both starts and ends on the backdrop,
+              // so a text selection dragged out of the form doesn't dismiss it.
+              if (e.target === e.currentTarget) handleClose()
+            }}
           >
-            <motion.div
+            <m.div
+              ref={dialogRef}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="demo-modal-title"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               className="bg-white w-full max-w-lg max-h-[90vh] overflow-y-auto border border-gray-300"
-              onClick={(e) => e.stopPropagation()}
+              onMouseDown={(e) => e.stopPropagation()}
             >
               {/* Modal Header */}
               <div className="flex items-center justify-between p-6 border-b border-gray-200">
-                <h3 className="text-lg font-semibold text-gray-950">
+                <h3 id="demo-modal-title" className="text-lg font-semibold text-gray-950">
                   Request a Demo
                 </h3>
                 <button
                   type="button"
                   onClick={handleClose}
                   className="p-2 text-gray-400 hover:text-gray-600 bg-transparent border-none cursor-pointer"
-                  aria-label="Close modal"
+                  aria-label="Close dialog"
                 >
-                  <X size={20} />
+                  <X size={20} aria-hidden="true" />
                 </button>
               </div>
 
@@ -103,7 +171,7 @@ export default function CTA() {
                 {formSubmitted ? (
                   <div className="text-center py-8">
                     <div className="w-16 h-16 mx-auto mb-4 border border-gray-300 flex items-center justify-center">
-                      <Check size={32} className="text-green-600" />
+                      <Check size={32} className="text-green-600" aria-hidden="true" />
                     </div>
                     <h4 className="text-lg font-semibold text-gray-950 mb-2">
                       Thank You!
@@ -131,17 +199,20 @@ export default function CTA() {
                       <div className="relative">
                         <User
                           size={18}
+                          aria-hidden="true"
                           className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
                         />
                         <input
                           type="text"
                           id="name"
+                          name="name"
+                          autoComplete="name"
                           required
                           value={formData.name}
                           onChange={(e) =>
                             setFormData({ ...formData, name: e.target.value })
                           }
-                          className="w-full pl-10 pr-4 py-2 border border-gray-300 focus:outline-none focus:border-blue-primary"
+                          className="w-full pl-10 pr-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-primary focus:border-blue-primary"
                           placeholder="Your name"
                         />
                       </div>
@@ -157,11 +228,14 @@ export default function CTA() {
                       <div className="relative">
                         <Building
                           size={18}
+                          aria-hidden="true"
                           className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
                         />
                         <input
                           type="text"
                           id="organization"
+                          name="organization"
+                          autoComplete="organization"
                           required
                           value={formData.organization}
                           onChange={(e) =>
@@ -170,7 +244,7 @@ export default function CTA() {
                               organization: e.target.value,
                             })
                           }
-                          className="w-full pl-10 pr-4 py-2 border border-gray-300 focus:outline-none focus:border-blue-primary"
+                          className="w-full pl-10 pr-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-primary focus:border-blue-primary"
                           placeholder="Your organization"
                         />
                       </div>
@@ -186,17 +260,20 @@ export default function CTA() {
                       <div className="relative">
                         <Mail
                           size={18}
+                          aria-hidden="true"
                           className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
                         />
                         <input
                           type="email"
                           id="email"
+                          name="email"
+                          autoComplete="email"
                           required
                           value={formData.email}
                           onChange={(e) =>
                             setFormData({ ...formData, email: e.target.value })
                           }
-                          className="w-full pl-10 pr-4 py-2 border border-gray-300 focus:outline-none focus:border-blue-primary"
+                          className="w-full pl-10 pr-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-primary focus:border-blue-primary"
                           placeholder="your@email.com"
                         />
                       </div>
@@ -212,16 +289,18 @@ export default function CTA() {
                       <div className="relative">
                         <MessageSquare
                           size={18}
+                          aria-hidden="true"
                           className="absolute left-3 top-3 text-gray-400"
                         />
                         <textarea
                           id="message"
+                          name="message"
                           rows={4}
                           value={formData.message}
                           onChange={(e) =>
                             setFormData({ ...formData, message: e.target.value })
                           }
-                          className="w-full pl-10 pr-4 py-2 border border-gray-300 focus:outline-none focus:border-blue-primary resize-none"
+                          className="w-full pl-10 pr-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-primary focus:border-blue-primary resize-none"
                           placeholder="Tell us about your needs..."
                         />
                       </div>
@@ -237,8 +316,8 @@ export default function CTA() {
                   </form>
                 )}
               </div>
-            </motion.div>
-          </motion.div>
+            </m.div>
+          </m.div>
         )}
       </AnimatePresence>
     </>

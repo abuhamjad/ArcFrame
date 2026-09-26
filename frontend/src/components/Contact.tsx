@@ -1,12 +1,6 @@
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { Mail, Globe } from 'lucide-react'
-
-// TODO: Replace with your actual contact information
-const contactInfo = {
-  email: 'hello@arcframe.example',
-  linkedin: 'Arcframe',
-  website: 'arcframe.example',
-}
+import { site } from '../site'
 
 export default function Contact() {
   return (
@@ -14,7 +8,7 @@ export default function Contact() {
       <div className="section-container">
         <div className="grid lg:grid-cols-2 gap-16">
           {/* Left Content */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -31,17 +25,17 @@ export default function Contact() {
 
             <div className="space-y-4">
               <a
-                href={`mailto:${contactInfo.email}`}
+                href={`mailto:${site.email}`}
                 className="flex items-center gap-3 text-gray-600 hover:text-gray-950 transition-colors group"
               >
                 <div className="w-10 h-10 border border-gray-300 flex items-center justify-center group-hover:border-blue-primary transition-colors">
                   <Mail size={18} className="text-gray-600" />
                 </div>
-                <span>{contactInfo.email}</span>
+                <span>{site.email}</span>
               </a>
 
               <a
-                href={`https://linkedin.com/company/${contactInfo.linkedin}`}
+                href={site.linkedin.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 text-gray-600 hover:text-gray-950 transition-colors group"
@@ -54,11 +48,11 @@ export default function Contact() {
                     <circle cx="4" cy="4" r="2"/>
                   </svg>
                 </div>
-                <span>LinkedIn: {contactInfo.linkedin}</span>
+                <span>LinkedIn: {site.linkedin.handle}</span>
               </a>
 
               <a
-                href={`https://${contactInfo.website}`}
+                href={`https://${site.website}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 text-gray-600 hover:text-gray-950 transition-colors group"
@@ -66,13 +60,13 @@ export default function Contact() {
                 <div className="w-10 h-10 border border-gray-300 flex items-center justify-center group-hover:border-blue-primary transition-colors">
                   <Globe size={18} className="text-gray-600" />
                 </div>
-                <span>{contactInfo.website}</span>
+                <span>{site.website}</span>
               </a>
             </div>
-          </motion.div>
+          </m.div>
 
           {/* Right - Visual/Placeholder */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -86,21 +80,11 @@ export default function Contact() {
               <h3 className="text-lg font-semibold text-gray-950 mb-2">
                 Arcframe
               </h3>
-              <p className="text-sm text-gray-600 mb-4">
+              <p className="text-sm text-gray-600">
                 AI-Powered Environmental Intelligence
               </p>
-
-              {/* TODO: Replace with team image if available */}
-              <div className="border border-gray-200 p-4 text-center">
-                <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">
-                  ADD TEAM IMAGE
-                </p>
-                <p className="text-xs text-gray-500">
-                  Replace with team photo or office image
-                </p>
-              </div>
             </div>
-          </motion.div>
+          </m.div>
         </div>
       </div>
     </section>

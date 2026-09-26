@@ -1,24 +1,24 @@
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { ArrowRight, Activity, Droplets, Wind, TrendingUp, Bell, Map } from 'lucide-react'
 import { useSmoothScroll } from '../hooks/useSmoothScroll'
-import MediaPlaceholder from './MediaPlaceholder'
+import dashboardImg from '../assets/sustainair-dashboard.png'
 
 const sampleMetrics = [
-  { icon: Activity, label: 'AQI', value: '72' },
-  { icon: Droplets, label: 'PM2.5', value: '48' },
-  { icon: Wind, label: 'PM10', value: '82' },
-  { icon: TrendingUp, label: 'Trend', value: '↑12%' },
+  { icon: Activity, label: 'AQI', value: '156' },
+  { icon: Droplets, label: 'PM2.5', value: '52%' },
+  { icon: Wind, label: 'PM10', value: '24%' },
+  { icon: TrendingUp, label: 'Tomorrow', value: '178' },
   { icon: Bell, label: 'Alerts', value: '3' },
-  { icon: Map, label: 'Zones', value: '24' },
+  { icon: Map, label: 'Stations', value: '42' },
 ]
 
 export default function ProductShowcase() {
   const scrollToSection = useSmoothScroll()
 
   return (
-    <section className="py-20 lg:py-28 bg-white">
+    <section id="product" className="py-20 lg:py-28 bg-white">
       <div className="section-container">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -27,36 +27,40 @@ export default function ProductShowcase() {
         >
           <span className="section-label mb-4 block">Product</span>
           <h2 className="section-heading mb-6">
-            See the Bigger Environmental Picture
+            One Platform. A Clearer View of Urban Air.
           </h2>
           <p className="section-subheading mx-auto">
-            A unified dashboard that brings together all your air quality data.
+            SustainAir brings air-quality monitoring, pollution trends, risk
+            assessment, alerts, forecasting, and AI-powered insights into one
+            unified dashboard.
           </p>
-        </motion.div>
+        </m.div>
 
         {/* Dashboard Preview */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
           className="relative"
         >
-          {/* Main Dashboard Placeholder */}
-          <div className="border border-gray-300">
-            {/* REPLACE: Add your SustainAir dashboard screenshot here */}
-            <MediaPlaceholder
-              type="image"
-              label="SUSTAINAIR DASHBOARD SCREENSHOT"
-              description="Replace with your actual SustainAir prototype screenshot"
-              aspect="aspect-[16/9]"
+          {/* Main Dashboard Screenshot */}
+          <div className="border border-gray-300 bg-white">
+            <img
+              src={dashboardImg}
+              width={1919}
+              height={991}
+              alt="SustainAir dashboard: AQI trend over the last seven days, pollutant breakdown by share, recent alerts by location and severity, and a live weather snapshot"
+              className="w-full h-auto block"
+              loading="lazy"
+              decoding="async"
             />
           </div>
 
-          {/* Floating Metric Cards */}
-          <div className="absolute -top-4 left-4 grid grid-cols-3 gap-2">
+          {/* Floating Metric Cards — overlay only where there is room for it */}
+          <div className="absolute -top-4 left-4 hidden lg:grid grid-cols-3 gap-2">
             {sampleMetrics.slice(0, 3).map((metric) => (
-              <motion.div
+              <m.div
                 key={metric.label}
                 initial={{ opacity: 0, y: -10 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -66,13 +70,13 @@ export default function ProductShowcase() {
               >
                 <p className="text-xs text-gray-500">{metric.label}</p>
                 <p className="text-lg font-semibold text-gray-950">{metric.value}</p>
-              </motion.div>
+              </m.div>
             ))}
           </div>
 
-          <div className="absolute -bottom-4 right-4 grid grid-cols-3 gap-2">
+          <div className="absolute -bottom-4 right-4 hidden lg:grid grid-cols-3 gap-2">
             {sampleMetrics.slice(3).map((metric) => (
-              <motion.div
+              <m.div
                 key={metric.label}
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -82,13 +86,13 @@ export default function ProductShowcase() {
               >
                 <p className="text-xs text-gray-500">{metric.label}</p>
                 <p className="text-lg font-semibold text-gray-950">{metric.value}</p>
-              </motion.div>
+              </m.div>
             ))}
           </div>
-        </motion.div>
+        </m.div>
 
         {/* CTA */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -103,7 +107,7 @@ export default function ProductShowcase() {
             Explore SustainAir
             <ArrowRight size={18} className="ml-2" />
           </button>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   )

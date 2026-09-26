@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { Monitor, Brain, Shield, MapPin, Bell, BarChart3 } from 'lucide-react'
 
 const features = [
@@ -44,7 +44,7 @@ export default function Features() {
   return (
     <section id="features" className="py-20 lg:py-28 bg-neutral-850">
       <div className="section-container">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -58,11 +58,11 @@ export default function Features() {
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             A comprehensive suite of tools designed for government and environmental authorities.
           </p>
-        </motion.div>
+        </m.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           {features.map((feature, index) => (
-            <motion.div
+            <m.div
               key={feature.number}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -80,12 +80,7 @@ export default function Features() {
                 </h3>
               </div>
               <p className="text-sm text-gray-600">{feature.description}</p>
-              <div className="mt-4 pt-4 border-t border-gray-200">
-                <span className="text-xs text-blue-primary">
-                  Learn more →
-                </span>
-              </div>
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </div>

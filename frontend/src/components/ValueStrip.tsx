@@ -1,5 +1,5 @@
 import { Monitor, Brain, MapPin, BarChart3 } from 'lucide-react'
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 
 const values = [
   {
@@ -30,7 +30,7 @@ export default function ValueStrip() {
       <div className="section-container">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {values.map((value, index) => (
-            <motion.div
+            <m.div
               key={value.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -45,7 +45,7 @@ export default function ValueStrip() {
                 {value.title}
               </h3>
               <p className="text-xs text-gray-500">{value.description}</p>
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </div>

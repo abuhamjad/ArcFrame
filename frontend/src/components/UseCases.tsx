@@ -1,7 +1,7 @@
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { Building2, ShieldCheck, Map, Factory, FlaskConical } from 'lucide-react'
 
-const useCases = [
+const scenarios = [
   {
     icon: Building2,
     title: 'Government & Municipal Bodies',
@@ -33,7 +33,7 @@ export default function UseCases() {
   return (
     <section id="use-cases" className="py-20 lg:py-28 bg-white">
       <div className="section-container">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -47,12 +47,12 @@ export default function UseCases() {
           <p className="section-subheading mx-auto">
             Tailored solutions for organizations working to improve urban air quality.
           </p>
-        </motion.div>
+        </m.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {useCases.map((useCase, index) => (
-            <motion.div
-              key={useCase.title}
+          {scenarios.map((scenario, index) => (
+            <m.div
+              key={scenario.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -60,13 +60,13 @@ export default function UseCases() {
               className="border border-gray-200 p-6 hover:border-gray-300 transition-colors"
             >
               <div className="w-12 h-12 border border-gray-300 flex items-center justify-center mb-4">
-                <useCase.icon size={24} className="text-blue-primary" />
+                <scenario.icon size={24} className="text-blue-primary" />
               </div>
               <h3 className="text-lg font-semibold text-gray-950 mb-2">
-                {useCase.title}
+                {scenario.title}
               </h3>
-              <p className="text-sm text-gray-600">{useCase.description}</p>
-            </motion.div>
+              <p className="text-sm text-gray-600">{scenario.description}</p>
+            </m.div>
           ))}
         </div>
       </div>

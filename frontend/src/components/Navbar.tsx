@@ -1,13 +1,13 @@
 import { useState, useEffect, useCallback } from 'react'
 import { Menu, X } from 'lucide-react'
-import { useSmoothScroll } from '../hooks/useSmoothScroll'
+import { useSmoothScroll, scrollToTop } from '../hooks/useSmoothScroll'
 
 const navLinks = [
-  { label: 'Product', sectionId: 'solution' },
+  { label: 'Product', sectionId: 'product' },
   { label: 'How It Works', sectionId: 'how-it-works' },
   { label: 'Features', sectionId: 'features' },
   { label: 'Use Cases', sectionId: 'use-cases' },
-  { label: 'About', sectionId: 'contact' },
+  { label: 'About', sectionId: 'about' },
   { label: 'Contact', sectionId: 'contact' },
 ]
 
@@ -20,9 +20,19 @@ export default function Navbar() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20)
     }
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  // Escape closes the mobile menu.
+  useEffect(() => {
+    if (!isMobileMenuOpen) return
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsMobileMenuOpen(false)
+    }
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [isMobileMenuOpen])
 
   const handleNavClick = useCallback((sectionId: string) => {
     scrollToSection(sectionId)
@@ -31,19 +41,20 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 bg-white transition-all duration-200 ${
-        isScrolled ? 'border-b border-gray-200' : 'border-b border-gray-200'
+      className={`fixed top-0 left-0 right-0 z-50 bg-white border-b transition-all duration-200 ${
+        isScrolled ? 'border-gray-200 shadow-sm' : 'border-gray-200'
       }`}
     >
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Main">
         <div className={`flex items-center justify-between transition-all duration-200 ${
           isScrolled ? 'h-14' : 'h-16'
         }`}>
           {/* Logo */}
           <button
             type="button"
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            onClick={scrollToTop}
             className="flex items-center bg-transparent border-none cursor-pointer p-0"
+            aria-label="Arcframe — back to top"
           >
             <span className="text-xl font-semibold tracking-tight">
               <span className="text-gray-950">ARC</span>
@@ -81,7 +92,9 @@ export default function Navbar() {
             type="button"
             className="lg:hidden p-2 text-gray-600 hover:text-gray-950 bg-transparent border-none cursor-pointer"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle menu"
+            aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-menu"
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -89,7 +102,7 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden border-t border-gray-200 py-4">
+          <div id="mobile-menu" className="lg:hidden border-t border-gray-200 py-4">
             <div className="flex flex-col gap-4">
               {navLinks.map((link) => (
                 <button

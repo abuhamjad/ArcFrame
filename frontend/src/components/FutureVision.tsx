@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { Radio, Brain, MapPin, FileText, Building2, Bell, Workflow } from 'lucide-react'
 
 const roadmapItems = [
@@ -50,7 +50,7 @@ export default function FutureVision() {
   return (
     <section className="py-20 lg:py-28 bg-neutral-850">
       <div className="section-container">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -65,50 +65,57 @@ export default function FutureVision() {
             The platform is designed to evolve toward more advanced capabilities
             that will further support environmental authorities and urban planners.
           </p>
-        </motion.div>
+        </m.div>
 
         {/* Roadmap Timeline */}
         <div className="relative">
           {/* Vertical Line */}
-          <div className="absolute left-4 lg:left-1/2 top-0 bottom-0 w-px bg-gray-300 transform lg:-translate-x-1/2" />
+          <div className="absolute left-4 lg:left-1/2 top-0 bottom-0 w-px bg-gray-300 lg:-translate-x-1/2" />
 
           <div className="space-y-8">
-            {roadmapItems.map((item, index) => (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.05 }}
-                className={`relative pl-12 lg:pl-0 ${
-                  index % 2 === 0 ? 'lg:pr-1/2 lg:text-right' : 'lg:pl-1/2 lg:text-left'
-                }`}
-              >
-                {/* Timeline Dot */}
-                <div className="absolute left-4 lg:left-1/2 top-0 w-3 h-3 border-2 border-blue-primary bg-white transform lg:-translate-x-1/2" />
-
-                <div
-                  className={`inline-block border border-gray-300 p-4 bg-white ${
-                    index % 2 === 0 ? 'lg:ml-8' : 'lg:mr-8'
+            {roadmapItems.map((item, index) => {
+              const isLeft = index % 2 === 0
+              return (
+                <m.div
+                  key={item.title}
+                  initial={{ opacity: 0, x: isLeft ? -20 : 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.05 }}
+                  className={`relative pl-12 lg:pl-0 lg:w-1/2 ${
+                    isLeft
+                      ? 'lg:pr-8 lg:text-right'
+                      : 'lg:ml-auto lg:pl-8 lg:text-left'
                   }`}
                 >
-                  <div className="flex items-center gap-3 mb-2">
-                    <item.icon size={18} className="text-blue-primary" />
-                    <h3 className="text-sm font-semibold text-gray-950">
-                      {item.title}
-                    </h3>
+                  {/* Timeline dot, centred on the vertical line */}
+                  <div
+                    className={`absolute left-4 top-0 w-3 h-3 border-2 border-blue-primary bg-white -translate-x-1/2 ${
+                      isLeft
+                        ? 'lg:left-auto lg:right-0 lg:translate-x-1/2'
+                        : 'lg:left-0'
+                    }`}
+                  />
+
+                  <div className="inline-block border border-gray-300 p-4 bg-white text-left">
+                    <div className="flex items-center gap-3 mb-2">
+                      <item.icon size={18} className="text-blue-primary" aria-hidden="true" />
+                      <h3 className="text-sm font-semibold text-gray-950">
+                        {item.title}
+                      </h3>
+                    </div>
+                    <p className="text-xs text-gray-600">{item.description}</p>
+                    <span className="inline-block mt-2 text-xs text-gray-500 border border-gray-300 px-2 py-0.5">
+                      Roadmap
+                    </span>
                   </div>
-                  <p className="text-xs text-gray-600">{item.description}</p>
-                  <span className="inline-block mt-2 text-xs text-gray-500 border border-gray-300 px-2 py-0.5">
-                    Roadmap
-                  </span>
-                </div>
-              </motion.div>
-            ))}
+                </m.div>
+              )
+            })}
           </div>
         </div>
 
-        <motion.p
+        <m.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -116,7 +123,7 @@ export default function FutureVision() {
           className="text-center text-sm text-gray-500 mt-12"
         >
           These are future capabilities and roadmap items. They are not necessarily available today.
-        </motion.p>
+        </m.p>
       </div>
     </section>
   )

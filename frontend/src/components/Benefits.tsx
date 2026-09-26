@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { Zap, Eye, AlertTriangle, Target } from 'lucide-react'
 
 const benefits = [
@@ -28,7 +28,7 @@ export default function Benefits() {
   return (
     <section className="py-20 lg:py-28 bg-neutral-850">
       <div className="section-container">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -42,11 +42,11 @@ export default function Benefits() {
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Designed to help authorities act on air quality data with confidence.
           </p>
-        </motion.div>
+        </m.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
           {benefits.map((benefit, index) => (
-            <motion.div
+            <m.div
               key={benefit.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -61,7 +61,7 @@ export default function Benefits() {
                 {benefit.title}
               </h3>
               <p className="text-sm text-gray-600">{benefit.description}</p>
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </div>

@@ -14,6 +14,15 @@
   ::selection {
     @apply bg-blue-primary/20;
   }
+
+  /* Visible focus ring for keyboard users on every interactive element. */
+  :focus-visible {
+    @apply outline-none ring-2 ring-blue-primary ring-offset-2;
+  }
+
+  main:focus {
+    @apply outline-none;
+  }
 }
 
 @layer components {
@@ -40,12 +49,29 @@
   .section-subheading {
     @apply text-lg text-gray-600 max-w-2xl;
   }
+
+  .skip-link {
+    @apply sr-only;
+  }
+
+  .skip-link:focus {
+    @apply not-sr-only fixed top-4 left-4 z-[60] bg-blue-primary text-white px-4 py-2 font-medium;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  * {
+  html {
+    /* Without this, every programmatic scroll stays animated regardless of the
+       user's preference. Framer Motion is handled by MotionConfig in App.tsx. */
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
