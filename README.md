@@ -1,30 +1,34 @@
+<div align="center">
+
 # Arcframe
 
 ### AI-Powered Environmental Intelligence Platform
 
-*A modern marketing website for Arcframe's SustainAir — helping government and environmental authorities turn air quality data into actionable intelligence.*
+**A modern marketing website for Arcframe's SustainAir — helping government and environmental authorities turn air-quality data into actionable intelligence.**
 
-<p align="center">
-
-![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)
-![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)
-![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-06B6D4?logo=tailwindcss)
-![Framer Motion](https://img.shields.io/badge/Framer_Motion-11-FF0055?logo=framer)
-![Vercel](https://img.shields.io/badge/Deploy-Vercel-black?logo=vercel)
-![License](https://img.shields.io/badge/license-MIT-success)
-
+<p>
+  <img src="https://img.shields.io/badge/React-19-61DAFB?logo=react" alt="React">
+  <img src="https://img.shields.io/badge/TypeScript-5-blue?logo=typescript" alt="TypeScript">
+  <img src="https://img.shields.io/badge/Vite-8-646CFF?logo=vite" alt="Vite">
+  <img src="https://img.shields.io/badge/Tailwind_CSS-3-06B6D4?logo=tailwindcss" alt="Tailwind CSS">
+  <img src="https://img.shields.io/badge/Framer_Motion-11-FF0055?logo=framer" alt="Framer Motion">
+  <img src="https://img.shields.io/badge/Deploy-Vercel-black?logo=vercel" alt="Vercel">
+  <img src="https://img.shields.io/badge/License-MIT-success" alt="License">
 </p>
 
 ---
 
-**Arcframe** is a technology venture focused on AI-powered environmental intelligence. Its first product, **SustainAir**, helps government and environmental authorities monitor, understand, and respond to urban air pollution.
+**Arcframe** is a technology venture focused on AI-powered environmental intelligence.
 
-This repository contains the official Arcframe marketing website — a production-ready, single-page landing site showcasing SustainAir's capabilities and value proposition.
+Its first product, **SustainAir**, helps government and environmental authorities monitor, understand, and respond to urban air pollution.
+
+This repository contains the official **Arcframe marketing website** — a production-ready, single-page landing site showcasing SustainAir's capabilities and value proposition.
+
+</div>
 
 ---
 
-# Table of Contents
+# 📑 Table of Contents
 
 - [About](#-about)
 - [Core Problem](#-core-problem)
@@ -45,27 +49,31 @@ This repository contains the official Arcframe marketing website — a productio
 
 ---
 
-# About
+# 🌍 About
 
 Arcframe helps government and environmental teams monitor pollution, identify emerging risks, and make faster, data-driven decisions with AI-powered environmental intelligence.
 
-**Value Proposition:** Turning complex air-quality data into simple, actionable intelligence.
+### Value Proposition
 
-**Tagline:** Monitor. Predict. Act.
+> Turning complex air-quality data into simple, actionable intelligence.
+
+### Tagline
+
+**Monitor. Predict. Act.**
 
 ---
 
-# Core Problem
+# ⚠️ Core Problem
 
 Government and environmental authorities face significant challenges:
 
-- **Fragmented Data** — Information from multiple sources makes analysis slower and more difficult
-- **Delayed Risk Detection** — Changing pollution conditions make it hard to identify emerging risks quickly
-- **Complex Decision Making** — Large datasets are difficult to interpret without clear, localized insights
+- **Fragmented Data** — Information from multiple sources makes analysis slower and more difficult.
+- **Delayed Risk Detection** — Changing pollution conditions make it hard to identify emerging risks quickly.
+- **Complex Decision Making** — Large datasets are difficult to interpret without clear, localized insights.
 
 ---
 
-# Core Solution
+# 💡 Core Solution
 
 **SustainAir** brings together everything authorities need:
 
@@ -80,7 +88,7 @@ All in one unified platform designed for government and enterprise use.
 
 ---
 
-# Key Features
+# 🚀 Key Features
 
 ## Real-Time Monitoring
 
@@ -108,7 +116,7 @@ Turn complex environmental information into clear, actionable insights.
 
 ---
 
-# Target Audience
+# 🎯 Target Audience
 
 ## Primary Customers
 
@@ -127,11 +135,11 @@ Turn complex environmental information into clear, actionable insights.
 
 ---
 
-# Technology Stack
+# 🛠️ Technology Stack
 
 ## Frontend
 
-- React 18
+- React 19
 - TypeScript 5
 - Vite 8
 - Tailwind CSS 3
@@ -144,18 +152,18 @@ Turn complex environmental information into clear, actionable insights.
 
 ---
 
-# Project Structure
+# 📁 Project Structure
 
-```
+```text
 Arcframe Website/
 │
 ├── docs/
-│   └── overview.md              # Project documentation
+│   └── overview.md
 │
 ├── frontend/
 │   ├── public/
-│   │   ├── assets/             # Media assets directory
-│   │   └── favicon.svg         # Site favicon
+│   │   ├── assets/
+│   │   └── favicon.svg
 │   │
 │   ├── src/
 │   │   ├── components/
@@ -186,7 +194,6 @@ Arcframe Website/
 │
 ├── .gitignore
 └── README.md
-```
 
 ---
 
