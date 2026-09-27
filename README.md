@@ -28,7 +28,7 @@ This repository contains the official **Arcframe marketing website** — a produ
 
 ---
 
-# 📑 Table of Contents
+# Table of Contents
 
 - [About](#-about)
 - [Core Problem](#-core-problem)
@@ -49,7 +49,7 @@ This repository contains the official **Arcframe marketing website** — a produ
 
 ---
 
-# 🌍 About
+# About
 
 Arcframe helps government and environmental teams monitor pollution, identify emerging risks, and make faster, data-driven decisions with AI-powered environmental intelligence.
 
@@ -63,7 +63,7 @@ Arcframe helps government and environmental teams monitor pollution, identify em
 
 ---
 
-# ⚠️ Core Problem
+# Core Problem
 
 Government and environmental authorities face significant challenges:
 
@@ -73,7 +73,7 @@ Government and environmental authorities face significant challenges:
 
 ---
 
-# 💡 Core Solution
+# Core Solution
 
 **SustainAir** brings together everything authorities need:
 
@@ -88,7 +88,7 @@ All in one unified platform designed for government and enterprise use.
 
 ---
 
-# 🚀 Key Features
+# Key Features
 
 ## Real-Time Monitoring
 
@@ -116,7 +116,7 @@ Turn complex environmental information into clear, actionable insights.
 
 ---
 
-# 🎯 Target Audience
+# Target Audience
 
 ## Primary Customers
 
@@ -135,7 +135,7 @@ Turn complex environmental information into clear, actionable insights.
 
 ---
 
-# 🛠️ Technology Stack
+# Technology Stack
 
 ## Frontend
 
@@ -152,7 +152,7 @@ Turn complex environmental information into clear, actionable insights.
 
 ---
 
-# 📁 Project Structure
+# Project Structure
 
 ```text
 Arcframe Website/
